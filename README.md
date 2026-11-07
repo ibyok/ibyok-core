@@ -1,22 +1,24 @@
 # ibyok-core
 
-The official CLI and Claude Code plugin for [IBYOK](https://www.ibyok.com) (Bring Your Own Keys).
+The official CLI and AI agent skills for [IBYOK](https://www.ibyok.com) (Bring Your Own Keys).
 
-Keep LLM API keys out of your code, your `.env` files and your CI config. Store them
-once in IBYOK, then run any command with the keys injected as environment variables:
+Keep LLM API keys out of your code, your `.env` files and your CI config. Store them once
+in IBYOK, then run any command with the keys injected as environment variables:
 
 ```bash
 npx ibyok run -- npm run dev
 ```
 
-Your app keeps reading `process.env.OPENAI_API_KEY` exactly as before. No SDK and no code changes.
+Your app keeps reading `process.env.OPENAI_API_KEY` exactly as before. No SDK and no
+code changes. It works in any terminal, CI system or editor, and with any AI coding
+agent: Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf and more.
 
 - **Never on disk.** Key values exist only in the environment of the process you run.
   The project file `.ibyok.json` holds only key IDs, so commit it.
 - **Mock mode for free.** In development and staging, IBYOK can hand out realistic fake
   keys, so local runs and tests don't spend provider credits or quota.
-- **Agent-safe.** The included Claude Code skills set up and migrate projects without
-  any key value entering the agent's context.
+- **Agent-safe.** The included skills let any AI agent set up and migrate a project
+  without a key value ever entering its context.
 
 ## Quick start
 
@@ -48,6 +50,64 @@ npm install --save-dev ibyok
   "test": "ibyok run -- vitest"
 }
 ```
+
+It isn't limited to Node projects. `ibyok run -- uv run app.py`, `ibyok run -- go run .`
+and `ibyok run -- docker compose up` all work the same way.
+
+## AI agent skills
+
+The [`skills/`](skills) folder holds three skills in the open
+[Agent Skills](https://agentskills.io) (`SKILL.md`) format:
+
+| Skill | Use it to |
+|---|---|
+| [`ibyok-setup`](skills/ibyok-setup/SKILL.md) | Connect a project: log in, map keys, wire `ibyok run` into scripts |
+| [`ibyok-migrate`](skills/ibyok-migrate/SKILL.md) | Move hardcoded and `.env` keys into IBYOK and clean them out of the repo |
+| [`ibyok-troubleshoot`](skills/ibyok-troubleshoot/SKILL.md) | Diagnose login, mapping, quota and mock-mode problems |
+
+They are written so the agent **never sees a key value or your access token**. It
+verifies with `ibyok status` and `ibyok run --dry-run`, never by printing the
+environment, and you run `ibyok login` yourself.
+
+### Install in any agent
+
+[`skills`](https://github.com/vercel-labs/skills) installs them into whichever agents
+you use (Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, Goose,
+OpenCode and many more):
+
+```bash
+npx skills add ibyok/ibyok-core                       # pick agents interactively
+npx skills add ibyok/ibyok-core -a codex -a cursor    # or name them
+npx skills add ibyok/ibyok-core -g                    # for your user, not just this project
+```
+
+### Claude Code plugin
+
+This repo is also a Claude Code plugin marketplace, which adds versioned updates:
+
+```
+/plugin marketplace add ibyok/ibyok-core
+/plugin install ibyok@ibyok
+```
+
+### Manual install
+
+Copy the folders in `skills/` into your agent's skills directory, for example
+`.agents/skills/` (shared by several agents) or `.claude/skills/`. Check your
+agent's docs for its path.
+
+### Agents without skills support: `AGENTS.md`
+
+If your agent reads `AGENTS.md` but doesn't support skills, append the IBYOK rules to
+your project's `AGENTS.md`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ibyok/ibyok-core/main/templates/AGENTS.md >> AGENTS.md
+```
+
+[That snippet](templates/AGENTS.md) tells the agent to use `ibyok run`, to verify
+without printing values, and to leave `ibyok login` to you. It's also worth adding
+alongside the skills, so every agent in the repo follows the same rules.
 
 ## Commands
 
@@ -112,25 +172,6 @@ in this order: `--env`, then `IBYOK_ENV`, then `"env"` in this file, then `devel
 
 One secret replaces a secret per provider.
 
-## Claude Code plugin
-
-This repo is also a Claude Code plugin marketplace:
-
-```
-/plugin marketplace add ibyok/ibyok-core
-/plugin install ibyok@ibyok
-```
-
-| Skill | Use it to |
-|---|---|
-| `ibyok-setup` | Connect a project: log in, map keys, wire `ibyok run` into scripts |
-| `ibyok-migrate` | Move hardcoded and `.env` keys into IBYOK and clean them out of the repo |
-| `ibyok-troubleshoot` | Diagnose login, mapping, quota and mock-mode problems |
-
-The skills are written so the agent never sees a key value or your access token.
-It verifies with `ibyok status` and `ibyok run --dry-run`, and you run `ibyok login`
-yourself.
-
 ## Development
 
 ```bash
@@ -138,8 +179,10 @@ npm install
 npm test        # builds, then runs unit tests and end-to-end tests against a fake API
 ```
 
-Requires Node.js 18.17 or newer. There are no runtime dependencies.
+Requires Node.js 18.17 or newer. There are no runtime dependencies. See
+[AGENTS.md](AGENTS.md) for repo conventions (it's for humans too).
 
 ## License
 
-MIT
+[MIT](LICENSE). The IBYOK name and logo are trademarks of IBYOK and are not covered by
+the license.

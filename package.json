@@ -1,7 +1,7 @@
 {
   "name": "ibyok",
   "version": "0.1.0",
-  "description": "IBYOK CLI: inject your stored LLM API keys into any command at runtime, without ever writing them to disk.",
+  "description": "IBYOK CLI: run any command with your stored API keys injected at runtime. No keys in code, .env files or CI.",
   "license": "MIT",
   "author": "IBYOK (https://www.ibyok.com)",
   "homepage": "https://github.com/ibyok/ibyok-core#readme",
@@ -16,11 +16,16 @@
     "ibyok",
     "api-keys",
     "secrets",
+    "secrets-management",
+    "dotenv",
     "llm",
     "openai",
     "anthropic",
     "cli",
-    "claude-code"
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor"
   ],
   "bin": {
     "ibyok": "dist/cli.js"

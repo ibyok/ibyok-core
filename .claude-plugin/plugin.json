@@ -9,5 +9,12 @@
   "homepage": "https://github.com/ibyok/ibyok-core",
   "repository": "https://github.com/ibyok/ibyok-core",
   "license": "MIT",
-  "keywords": ["secrets", "api-keys", "llm", "env", "security"]
+  "keywords": [
+    "secrets",
+    "api-keys",
+    "llm",
+    "env",
+    "security",
+    "agent-skills"
+  ]
 }
