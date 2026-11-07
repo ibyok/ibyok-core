@@ -1,0 +1,13 @@
+{
+  "name": "ibyok",
+  "version": "0.1.0",
+  "description": "Set up, migrate to, and troubleshoot IBYOK: keep LLM API keys out of code and .env files by injecting them at runtime with `ibyok run`.",
+  "author": {
+    "name": "IBYOK",
+    "url": "https://www.ibyok.com"
+  },
+  "homepage": "https://github.com/ibyok/ibyok-core",
+  "repository": "https://github.com/ibyok/ibyok-core",
+  "license": "MIT",
+  "keywords": ["secrets", "api-keys", "llm", "env", "security"]
+}

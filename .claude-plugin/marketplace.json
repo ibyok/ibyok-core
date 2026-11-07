@@ -1,0 +1,18 @@
+{
+  "name": "ibyok",
+  "owner": {
+    "name": "IBYOK",
+    "url": "https://www.ibyok.com"
+  },
+  "metadata": {
+    "description": "Official IBYOK plugins for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "ibyok",
+      "source": "./",
+      "description": "Set up, migrate to, and troubleshoot IBYOK: keep LLM API keys out of code and .env files by injecting them at runtime with `ibyok run`.",
+      "version": "0.1.0"
+    }
+  ]
+}

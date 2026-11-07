@@ -1,0 +1,46 @@
+{
+  "name": "ibyok",
+  "version": "0.1.0",
+  "description": "IBYOK CLI: inject your stored LLM API keys into any command at runtime, without ever writing them to disk.",
+  "license": "MIT",
+  "author": "IBYOK (https://www.ibyok.com)",
+  "homepage": "https://github.com/ibyok/ibyok-core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibyok/ibyok-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ibyok/ibyok-core/issues"
+  },
+  "keywords": [
+    "ibyok",
+    "api-keys",
+    "secrets",
+    "llm",
+    "openai",
+    "anthropic",
+    "cli",
+    "claude-code"
+  ],
+  "bin": {
+    "ibyok": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && tsc -p tsconfig.test.json && node --test dist-test/test/*.test.js",
+    "prepublishOnly": "npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}
